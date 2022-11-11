@@ -1,3 +1,11 @@
+/*
+* Program to run multiple line sensor on thread
+* @author Nusan Rana
+*  
+*/
+
+
+
 #include <stdio.h>
 #include <pigpio.h>
 #include <unistd.h>
@@ -7,7 +15,7 @@
 
 
 
-//hi//defining sensors gpio
+//defining sensors gpio
 #define LEFT_LINE_SENSOR 14
 #define RIGHT_LINE_SENSOR 18
 #define ON 1
@@ -56,6 +64,8 @@ int main(){
 
 	//threads for line sensor
 	pthread_t left_line_sensor_thread, right_line_sensor_thread;
+
+	//creating threads, passing struct which has sensor name and sensor gpio pin #
 	if(pthread_create(&left_line_sensor_thread, NULL, line_sensor, (void *)LeftLine) != 0){
 		printf("Error creating thread");
 	}
@@ -74,7 +84,9 @@ int main(){
     return 0;
 }
 
-
+//this function take in a pointer to a struct LineSensorData
+//and access the name and value of gpio from the struct
+//TODO: add a way to stop the loop
 void *line_sensor(void* input){
 
 	char  *name = ((struct LineSensorData*)input)->sensor_name;
@@ -89,5 +101,7 @@ void *line_sensor(void* input){
 	sleep(1);
 	}
 }
+
+//TODO: check the value or line sensor and detect which way to turn
 
 
