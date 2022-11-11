@@ -43,7 +43,7 @@ int main(){
 
 
 //	for (int i = 0; i < 10; ++i){
-	while(1){
+//	while(1){
 	//	if(left == 0){
 	//		printf("WHITE: %d", left);
 	//	}
@@ -52,11 +52,12 @@ int main(){
 	//	}
 	//	printf("\n");
 	//	sleep(1);
+		line_sensor(RIGHT_LINE_SENSOR, r_sensor);
 		line_sensor(LEFT_LINE_SENSOR, l_sensor);
 		printf("after left line");
-		line_sensor(RIGHT_LINE_SENSOR, r_sensor);
-		sleep(1);
-	}
+		
+//		sleep(1);
+//	}
 	pthread_join(left_line_sensor_thread, NULL);
 	pthread_join(right_line_sensor_thread, NULL);
     	printf("Thread ended.\n"); 
