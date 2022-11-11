@@ -33,7 +33,7 @@ int main(){
 
 	//line sensor data
 	struct LineSensorData *LeftLine = (struct LineSensorData *)malloc(sizeof(struct LineSensorData));
-    struct LineSensorData *RightLine = (struct LineSensorData *)malloc(sizeof(struct LineSensorData));
+	struct LineSensorData *RightLine = (struct LineSensorData *)malloc(sizeof(struct LineSensorData));
 
 	//setting sensor data name and var for easy readability
 	LeftLine->sensor_name = l_sensor;
@@ -77,8 +77,8 @@ int main(){
 
 void *line_sensor(void* input){
 
-	char  *name = ((struct sensorInfo*)input)->name;
-	int gpioPin = ((struct sensorInfo*)input)->sensorGpio;
+	char  *name = ((struct LineSensorData*)input)->sensor_name;
+	int gpioPin = ((struct LineSensorData*)input)->gpioPin;
 	while(1){
 		if(gpioRead(gpioPin) == 1){
 			printf("%s on BLACK!\n", name);
