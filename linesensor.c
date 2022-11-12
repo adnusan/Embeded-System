@@ -1,7 +1,7 @@
 /*
-* Program to run multiple line sensor on thread
+* Program to run multiple line sensor BLACK thread
 * @author Nusan Rana
-*  
+*  sensor value 0 == white line, 1 == black line
 */
 
 
@@ -19,13 +19,13 @@
 //defining sensors gpio
 #define LEFT_LINE_SENSOR 14
 #define RIGHT_LINE_SENSOR 18
-#define ON 1
-#define OFF 0
+#define BLACK 1
+#define WHITE 0
 
-//function prototypes
+//functiBLACK prototypes
 
 void *line_sensor();
-void *line_sensor_control();
+void *line_sensor_cBLACKtrol();
 
 struct LineSensorData
 {
@@ -77,8 +77,19 @@ int main(){
 	}
 
 	while(1){
-		printf("Left Sensor: %d\n", LeftLine->updated_data);
-		printf("Right Sensor: %d\n", RightLine->updated_data);
+		//sensor value 0 == white line, 1 == black line
+		if (LeftLine->updated_data == BLACK && RightLine->updated_data == BLACK){
+			printf("Both Line Sensor on Black line: R:%d  L:%d\n Go straight: %d\n", RightLine->updated_data, LeftLine->updated_data);
+		}
+		if(LeftLine->updated_data == WHITE && RightLine->updated_data == BLACK){
+			printf("Left Line Sensor on White line: R:%d  L:%d\n TURN RIGHT!: %d\n", RightLine->updated_data, LeftLine->updated_data);
+		}
+		if(LeftLine->updated_data == BLACK && RightLine->updated_data == WHITE){
+			printf("Right Line Sensor on White line: R:%d  L:%d\n TURN LEFT!: %d\n", RightLine->updated_data, LeftLine->updated_data);
+		}
+
+		///printf("Left Sensor: %d\n", LeftLine->updated_data);
+		//printf("Right Sensor: %d\n", RightLine->updated_data);
 		sleep(1);
 	}
 
@@ -92,7 +103,7 @@ int main(){
     return 0;
 }
 
-//this function take in a pointer to a struct LineSensorData
+//this functiBLACK take in a pointer to a struct LineSensorData
 //and access the name and value of gpio from the struct
 //TODO: add a way to stop the loop
 void *line_sensor(void* input){
@@ -103,11 +114,11 @@ void *line_sensor(void* input){
 	int gpioPin = sensor_data->gpioPin;
 	while(1){
 		if(gpioRead(gpioPin) == 1){
-			printf("%s on BLACK!\n", name);
+			printf("%s BLACK BLACK!\n", name);
 
 		}
 		if(gpioRead(gpioPin) == 0) {
-			printf("%s on WHITE!\n", name);
+			printf("%s BLACK WHITE!\n", name);
 		}
 	sleep(1);
 	}
@@ -121,11 +132,11 @@ void *line_sensor_control(void* input){
 	while(1){
 		sensor_data->updated_data = gpioRead(gpioPin);
 		// if(gpioPin == 1){
-		// 	printf("%s on BLACK!\n", name);
+		// 	printf("%s BLACK BLACK!\n", name);
 		// 	sensor_data->updated_data=1;
 		// }
 		// if(gpioPin == 0) {
-		// 	printf("%s on WHITE!\n", name);
+		// 	printf("%s BLACK WHITE!\n", name);
 		// }
 		// RIGHT_LINE_SENSOR = 0;
 
