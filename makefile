@@ -3,5 +3,5 @@ linesensor:
 
 clean:
 	rm linesensor
-run: followLine
+run: linesensor
 	./linesensor
