@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 
@@ -30,7 +31,7 @@ struct LineSensorData
 {
 	char * sensor_name;
 	int gpioPin;
-	int updated_data = 0;
+	int updated_data;
 };
 
 
