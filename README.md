@@ -1,1 +1,1 @@
-# embededsystem
+# embeded system
