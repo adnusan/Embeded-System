@@ -135,14 +135,19 @@ int main(int argc, char *argv[]){
 		//sensor value 0 == white line, 1 == black line
 		//if both sensor is on black line then go straight
 		if (LeftLine->updated_data == WHITE && RightLine->updated_data == WHITE){
+<<<<<<< HEAD
 			printf("Both Line Sensor on Black line: R:%d  L:%d\n Go straight: \n", RightLine->updated_data, LeftLine->updated_data);
 			//call runmotorforward function
 			runMotorForward(motorA);
 			runMotorForward(motorB);
+=======
+			printf("Both Line Sensor on Black line: R:%d  L:%d\n Go straight: %d\n", RightLine->updated_data, LeftLine->updated_data);
+>>>>>>> ba6474b9214cb7f3627e98a58806bbc66e17052b
 		}
 
 		//if left sensor detect white then left side of car is out of lane, turn right to stay on black lane
 		if(LeftLine->updated_data == BLACK && RightLine->updated_data == WHITE){
+<<<<<<< HEAD
 			printf("Left Line Sensor on Black line: R:%d  L:%d\n TURN LEFT!: \n", RightLine->updated_data, LeftLine->updated_data);
 			runMotorForward(motorB);
 			stopMotorA();
@@ -152,6 +157,13 @@ int main(int argc, char *argv[]){
 			printf("Right Line Sensor on Black line: R:%d  L:%d\n TURN RIGHT!: \n", RightLine->updated_data, LeftLine->updated_data);
 			runMotorForward(motorA);
 			stopMotorB();
+=======
+			printf("Left Line Sensor on Black line: R:%d  L:%d\n TURN LEFT!: %d\n", RightLine->updated_data, LeftLine->updated_data);
+		}
+		//if right sensor detect white then right side of car is out of lane, turn left to stay on black lane
+		if(RightLine->updated_data == BLACK && LeftLine->updated_data == WHITE){
+			printf("Right Line Sensor on Black line: R:%d  L:%d\n TURN RIGHT!: %d\n", RightLine->updated_data, LeftLine->updated_data);
+>>>>>>> ba6474b9214cb7f3627e98a58806bbc66e17052b
 		}
 		sleep(1);
 	}
